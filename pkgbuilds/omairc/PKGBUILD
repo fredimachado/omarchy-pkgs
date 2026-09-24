@@ -1,6 +1,6 @@
 # Maintainer: Fredi Machado <fredisoft@gmail.com>
 pkgname=omairc
-pkgver=1.0.1
+pkgver=1.0.2
 pkgrel=1
 pkgdesc='Dead-simple IRC client for Omarchy'
 arch=('x86_64')
@@ -18,7 +18,7 @@ depends=(
 )
 makedepends=('python')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('706a877ac1a5d4e32fdd1ff306ce2b413ab6ad0fe277444209afa839bba2ccce')
+sha256sums=('4c60197c4e98a33997225a6396391d975da1e8c1a5f8b84c792e37fb23613c6d')
 
 build() {
   cd "$pkgname-$pkgver"
