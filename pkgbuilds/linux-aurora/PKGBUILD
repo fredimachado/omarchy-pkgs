@@ -5,12 +5,12 @@
 # alt-mode and USB4 support for external monitors, variable refresh rate, and
 # the ISP and AOP drivers. Those changes touch device trees, the type-C stack
 # and DRM, so they cannot ship as a module: this is a whole alternative kernel
-# for Macs on the Omarchy edge and rc channels. The stable channel keeps
-# asahi-alarm's linux-asahi.
+# for Macs on the Omarchy edge channel. It reaches rc and stable only after
+# cold-boot qualification on M1 and M2.
 
 _auroraver=7.1.12
 _aurorarel=2
-pkgrel=9
+pkgrel=11
 
 # Immutable pin on aurora-silicon/linux (branch aurora-wip). Every bump is a
 # PR that moves _commit and the archive checksum; the pinned commit is cold-boot
@@ -38,7 +38,7 @@ source=(
   rust-toolchain.toml
 )
 sha256sums=('6347354537148120fc5448afcb8671a558ce336f731c70690cd88062a903f84d'
-            '4228006ad9c5fcc2237b91b3fd1f70934d23e6d8bdb012faf5a763e042a6edee'
+            'e8f3818e6bfa70166dd5caff228a0becfdd5d4f0165b589efa38150fd0b59cc9'
             '2a95563bb9f5b216cc3c170a17e9471448bc63a7084bdd67df23d074939b366c')
 
 # Kbuild takes ARCH literally and knows arm64, not aarch64.
@@ -88,8 +88,9 @@ _package_kernel() {
   depends=(coreutils kmod initramfs $2 "m1n1>=$_m1n1_version")
   optdepends=('crda: to set the correct wireless channels of your country'
               'linux-firmware: firmware images needed for some devices')
-  provides=(WIREGUARD-MODULE linux=${pkgver} linux-asahi=${pkgver})
-  replaces=(wireguard-arch)
+  # No generic linux provide: on a shared aarch64 repository it would compete
+  # with linux-aarch64 for any dependency on linux.
+  provides=(WIREGUARD-MODULE linux-asahi=${pkgver})
   conflicts=(linux-asahi)
 
   local kernver="$(<$O/version)"
