@@ -1,6 +1,11 @@
 {
   "source": "local",
-  "release_ring": "fast",
+  "rebuild_on": [
+    "qt6-base",
+    "qt6-declarative",
+    "qt6-svg",
+    "qt6-wayland"
+  ],
   "upstream": {
     "git_tags": "https://github.com/fredimachado/omairc.git",
     "tag_pattern": "v{pkgver}",
