@@ -17,8 +17,21 @@ depends=(
   'xdg-desktop-portal'
 )
 makedepends=('python')
-source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
-sha256sums=('7bed0b68c3736a31a05254b2634844b37e989f625eceb239eff38e3073a82dd1')
+source=(
+  "$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz"
+  'qt6.12-http-header-case.patch'
+)
+sha256sums=(
+  '7bed0b68c3736a31a05254b2634844b37e989f625eceb239eff38e3073a82dd1'
+  '0676d0a0dfcdfe7bd571d1cb9f86215e02b8fbeafd76b7de11fbb211107c679e'
+)
+
+prepare() {
+  cd "$pkgname-$pkgver"
+  # Qt 6.12 writes canonical HTTP header names. The v1.10.3 upload tests
+  # still look for the lowercase names Qt 6.11 put on the wire.
+  patch -p1 -i "$srcdir/qt6.12-http-header-case.patch"
+}
 
 build() {
   cd "$pkgname-$pkgver"

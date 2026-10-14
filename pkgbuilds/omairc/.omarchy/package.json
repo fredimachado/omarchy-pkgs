@@ -6,7 +6,8 @@
     "tag_pattern": "v{pkgver}",
     "sources": {
       "any": [
-        "https://github.com/fredimachado/omairc/archive/refs/tags/{tag}.tar.gz"
+        "https://github.com/fredimachado/omairc/archive/refs/tags/{tag}.tar.gz",
+        "file:qt6.12-http-header-case.patch"
       ]
     }
   }
