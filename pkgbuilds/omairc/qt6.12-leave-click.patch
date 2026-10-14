@@ -1,0 +1,12 @@
+--- a/tests/ui/tst_omairc.qml
++++ b/tests/ui/tst_omairc.qml
+@@ -10473,6 +10473,9 @@
+         tryCompare(appWindow, "currentChannelJoined", true);
+         compare(item("headerLeaveButton").visible, true);
+         compare(item("peopleButton").visible, true);
++        // Leave was width 0 while the channel was parted. Qt 6.12 offscreen
++        // delivery misses the click until the row has rendered at its new size.
++        waitForRendering(item("headerLeaveButton"));
+ 
+         mouseClick(item("headerLeaveButton"));
+         tryCompare(appWindow, "currentChannelJoined", false);

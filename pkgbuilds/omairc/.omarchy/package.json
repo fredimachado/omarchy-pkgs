@@ -7,7 +7,8 @@
     "sources": {
       "any": [
         "https://github.com/fredimachado/omairc/archive/refs/tags/{tag}.tar.gz",
-        "file:qt6.12-http-header-case.patch"
+        "file:qt6.12-http-header-case.patch",
+        "file:qt6.12-leave-click.patch"
       ]
     }
   }

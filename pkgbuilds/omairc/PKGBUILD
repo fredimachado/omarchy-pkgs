@@ -20,10 +20,12 @@ makedepends=('python')
 source=(
   "$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz"
   'qt6.12-http-header-case.patch'
+  'qt6.12-leave-click.patch'
 )
 sha256sums=(
   '7bed0b68c3736a31a05254b2634844b37e989f625eceb239eff38e3073a82dd1'
   '0676d0a0dfcdfe7bd571d1cb9f86215e02b8fbeafd76b7de11fbb211107c679e'
+  'cc2cd0038bee1f44b7e439c3478cd6abdea143a74db41e071c8ca82a714c4056'
 )
 
 prepare() {
@@ -31,6 +33,9 @@ prepare() {
   # Qt 6.12 writes canonical HTTP header names. The v1.10.3 upload tests
   # still look for the lowercase names Qt 6.11 put on the wire.
   patch -p1 -i "$srcdir/qt6.12-http-header-case.patch"
+  # After a rejoin, Leave is shown again from width 0. Qt 6.12 offscreen
+  # drops that click unless the button has been rendered at its new size.
+  patch -p1 -i "$srcdir/qt6.12-leave-click.patch"
 }
 
 build() {
